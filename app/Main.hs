@@ -21,9 +21,9 @@ main = do
 get :: Album -> IO ()
 get a = shouldDownload a >>= \case
   True -> download a >>= \case
-    ExitSuccess -> pure ()
-    ExitFailure _ -> putStrLn $ "Failed " <> directory a
-  False -> putStrLn $ "Skipping " <> directory a
+    ExitSuccess -> putStrLn $ "[bctag-dl] Downloaded " <> directory a
+    ExitFailure _ -> putStrLn $ "[bctag-dl] Failed in " <> directory a
+  False -> putStrLn $ "[bctag-dl] Skipping " <> directory a
 
 shouldDownload :: Album -> IO Bool
 shouldDownload = fmap not . doesDirectoryExist . directory
